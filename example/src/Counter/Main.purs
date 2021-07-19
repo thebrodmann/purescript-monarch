@@ -16,7 +16,7 @@ import Run                   ( Run, EFFECT )
 import Effect                ( Effect )
 import Effect.Aff            ( launchAff_ )
 import Web.HTML              ( HTMLElement )
-import Monarch               ( Command, Upstream )
+import Monarch.Command       ( Command )
 import Monarch                                   as Monarch
 import Monarch.Html
 import Monarch.Event         ( Event
@@ -58,17 +58,17 @@ command message _ = case message of
 interpreter :: Command (API.COUNTER ()) Message Output Unit -> Command () Message Output Unit
 interpreter = API.run
 
-subscription :: Upstream Input Model Message -> Event Message
-subscription = const eNever
+-- subscription :: Upstream Input Model Message -> Event Message
+-- subscription = const eNever
 
 main :: HTMLElement -> Effect Unit
 main container = do
-  Monarch.document_ { input: unit
+  Monarch.bootstrap { input: unit
                     , init: const init
                     , update
                     , view
                     , command
                     , interpreter
-                    , subscription
                     , container
+                    , onOutput: \_ -> pure unit
                     }

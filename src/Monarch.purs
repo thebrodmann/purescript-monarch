@@ -11,9 +11,9 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 module Monarch
   ( module Monarch.Document
-  , module Monarch.Platform
+  , module Monarch.Command
   )
 where
 
 import Monarch.Document
-import Monarch.Platform ( BASIC, Command, Upstream, dispatch, raise )
+import Monarch.Command ( BASIC, Command, dispatch, raise )

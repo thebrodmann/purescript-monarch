@@ -12,6 +12,7 @@
   , "newtype"
   , "prelude"
   , "psci-support"
+  , "record"
   , "refs"
   , "run"
   , "strings"

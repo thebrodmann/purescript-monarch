@@ -23,3 +23,5 @@ type Effect<a> = Lazy<a>
 interface Tagged<a> {
     tag: a
 }
+
+declare module 'asap'

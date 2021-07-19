@@ -8,16 +8,20 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-type GetCurrentTime = Effect<number>
+interface State {
+    deadline: number
+}
 
-export const getCurrentTime: GetCurrentTime = (() => {
-    const hasPerformanceNow = typeof performance === 'object' && typeof performance.now === 'function'
+export interface Scheduler {
+    unsafe_shouldYieldToBrowser: Effect<boolean>
+    unsafe_promoteDeadline: Effect<Unit>
+}
 
-    if (hasPerformanceNow) {
-        return () => performance.now()
-    } else {
-        const initialTime = Date.now()
+export function mkScheduler(): Scheduler {
+    const state: State = { deadline: 0 }
 
-        return () => Date.now() - initialTime
+    return {
+        unsafe_shouldYieldToBrowser: () => performance.now() > state.deadline,
+        unsafe_promoteDeadline: () => (state.deadline = state.deadline + 5),
     }
-})()
+}
