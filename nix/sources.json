@@ -1,0 +1,40 @@
+{
+    "headroom-darwin": {
+        "sha256": "0si1wrid5w60dj2whif35l91kis0d3g7mcbaic1f20rhjlbavvzv",
+        "type": "file",
+        "url": "https://github.com/vaclavsvejcar/headroom/releases/download/v0.3.2.0/headroom-0.3.2.0-macOS-ghc-8.8.4",
+        "url_template": "https://github.com/vaclavsvejcar/headroom/releases/download/v<version>/headroom-<version>-macOS-ghc-8.8.4",
+        "version": "0.3.2.0"
+    },
+    "headroom-linux": {
+        "sha256": "0fxpr0lgxsq5fxr2lmkd14ci7ynfhqmg1w499pgw7ppwmcfs99yg",
+        "type": "file",
+        "url": "https://github.com/vaclavsvejcar/headroom/releases/download/v0.3.2.0/headroom-0.3.2.0-Linux-ghc-8.8.4",
+        "url_template": "https://github.com/vaclavsvejcar/headroom/releases/download/v<version>/headroom-<version>-Linux-ghc-8.8.4",
+        "version": "0.3.2.0"
+    },
+    "niv": {
+        "branch": "master",
+        "description": "Easy dependency management for Nix projects",
+        "homepage": "https://github.com/nmattia/niv",
+        "owner": "nmattia",
+        "repo": "niv",
+        "rev": "e0ca65c81a2d7a4d82a189f1e23a48d59ad42070",
+        "sha256": "1pq9nh1d8nn3xvbdny8fafzw87mj7gsmp6pxkdl65w2g18rmcmzx",
+        "type": "tarball",
+        "url": "https://github.com/nmattia/niv/archive/e0ca65c81a2d7a4d82a189f1e23a48d59ad42070.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs": {
+        "branch": "nixos-21.05",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b2f87e0043aaf3f0f05cc983bd6aa80a616b8352",
+        "sha256": "1mkg49dxkzkci6a6vh0cly98lh4mmg7fqdxi7fgjbps1y8bh7i2r",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/b2f87e0043aaf3f0f05cc983bd6aa80a616b8352.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}

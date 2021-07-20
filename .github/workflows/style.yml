@@ -1,0 +1,26 @@
+name: Code Style
+
+on:
+    pull_request:
+        braches:
+            - next
+            - master
+    push:
+        braches:
+            - next
+            - master
+
+jobs:
+    headroom:
+        name: © Headers
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: cachix/install-nix-action@v13
+            - uses: cachix/cachix-action@v10
+              with:
+                  name: purescript-monarch
+                  authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+            - name: Check headers
+              run: nix-shell -I nixpkgs=./nix -p headroom --pure --run "headroom run --check-headers"

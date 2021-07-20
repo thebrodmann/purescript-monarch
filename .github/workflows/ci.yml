@@ -1,51 +1,33 @@
 name: CI
 
 on:
+    pull_request:
+        branches:
+            - next
+            - master
     push:
         branches:
-            - master
             - next
-    pull_request:
+            - master
 
 jobs:
-    test:
-        name: Test
+    workflow:
+        name: Workflow
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
+            - uses: cachix/install-nix-action@v13
 
-            - run: |
-                  sudo curl -Lo /usr/bin/headroom https://github.com/vaclavsvejcar/headroom/releases/download/v0.3.2.0/headroom-0.3.2.0-Linux-ghc-8.8.4
-                  sudo chmod +x /usr/bin/headroom
-
-            - name: Cache Headroom binary
-              uses: actions/cache@v2
+            - uses: cachix/cachix-action@v10
               with:
-                  key: ${{ runner.os }}-headroom-${{ hashFiles('/usr/bin/headroom') }}
-                  restore-keys: ${{ runner.os }}-headroom-
-                  path: /usr/bin/headroom
-
-            - name: Check headers
-              run: headroom run --check-headers
-
-    build:
-        name: Build
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-
-            - uses: purescript-contrib/setup-purescript@main
-
+                  name: purescript-monarch
+                  authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
             - name: Cache NPM dependencies
               uses: actions/cache@v2
               with:
                   key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
                   restore-keys: ${{ runner.os }}-node-
                   path: ~/.npm
-
-            - name: Install NPM dependencies
-              run: npm ci
-
             - name: Cache PureScript dependencies
               uses: actions/cache@v2
               with:
@@ -54,11 +36,14 @@ jobs:
                       .spago
                       output
 
+            - name: Install NPM dependencies
+              run: nix-shell --pure --run "npm ci"
+
             - name: Install & build PureScript dependencies
-              run: spago build --deps-only
+              run: nix-shell --pure --run "spago build --deps-only"
 
             - name: Build TypeScript
-              run: npx tsc -p tsconfig.json
+              run: nix-shell --pure --run "tsc -p tsconfig.json"
 
             - name: Build PureScript
-              run: spago build
+              run: nix-shell --pure --run "spago build"

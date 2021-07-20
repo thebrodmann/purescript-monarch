@@ -26,16 +26,12 @@
     "homepage": "https://github.com/thebrodmann/monarch#readme",
     "dependencies": {
         "setimmediate": "^1.0.5",
-        "tslib": "^2.0.0"
+        "tslib": "^2.3.0"
     },
     "devDependencies": {
         "@types/setimmediate": "^1.0.2",
         "cpx": "^1.5.0",
         "npm-run-all": "^4.1.5",
-        "parcel": "^1.12.4",
-        "purescript": "~0.14.1",
-        "rimraf": "^3.0.2",
-        "spago": "^0.20.3",
-        "typescript": "^3.9.5"
+        "rimraf": "^3.0.2"
     }
 }
